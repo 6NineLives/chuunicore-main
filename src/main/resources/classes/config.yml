@@ -1,0 +1,13 @@
+# ---------------------------------------------- #
+#             Class list Configuration           #
+# ---------------------------------------------- #
+#                    Classes                     #
+# ---------------------------------------------- #
+
+classTier1:
+  requiredLevel: 1
+classTier2:
+  requiredLevel: 40
+classTier3:
+  requiredLevel: 70
+startingClass: "ranger"

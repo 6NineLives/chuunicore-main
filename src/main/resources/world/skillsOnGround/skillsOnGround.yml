@@ -1,0 +1,16 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#                 Town Information               #
+# ---------------------------------------------- #
+
+skillOnGround1:
+  name: Healer
+  period: 5
+  skillKey: "Campfire"
+  skillLevel: 1
+  loc:
+    world: world
+    x: 2065.5
+    y: 130.5
+    z: 1311.5

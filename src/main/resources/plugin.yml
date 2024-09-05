@@ -1,0 +1,139 @@
+main: io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia
+name: GuardiansOfAdelia
+version: '0.1'
+api-version: 1.20
+description: GuardiansOfAdelia MMORPG project
+load: POSTWORLD
+author: Lix3nn
+website: guardiansofadelia.com
+prefix: ViridiaCore
+depend:
+  - ProtocolLib
+  - Citizens
+  - LibsDisguises
+  - LuckPerms
+  - WorldEdit
+  - WorldGuard
+  - NoteBlockAPI
+  - CrazyAdvancementsAPI
+  - ModelEngine
+  - MythicMobs
+commands:
+  admin:
+    description: Admin command
+    permission: guardian.admin
+    permission-message: You do not have permission!
+  adminitem:
+    description: AdminItem command
+    permission: guardian.admin
+    permission-message: You do not have permission!
+  adminjob:
+    description: AdminJob command
+    permission: guardian.admin
+    permission-message: You do not have permission!
+  adminquest:
+    description: AdminQuest command
+    permission: guardian.admin
+    permission-message: You do not have permission!
+  adminreward:
+    description: AdminReward command
+    permission: guardian.admin
+    permission-message: You do not have permission!
+  admindungeon:
+    description: AdminDungeon command
+    permission: guardian.admin
+    permission-message: You do not have permission!
+  test:
+    description: Test command
+    permission: guardian.admin
+    permission-message: You do not have permission!
+  guild:
+    description: Guild command
+    aliases:
+      - g
+    permission: guardian.player
+    permission-message: You do not have permission!
+  chat:
+    description: Chat command
+    permission: guardian.player
+    permission-message: You do not have permission!
+  destroyitem:
+    description: Item destroy command
+    permission: guardian.player
+    permission-message: You do not have permission!
+  invite:
+    description: Invite command
+    aliases:
+      - i
+    permission: guardian.player
+    permission-message: You do not have permission!
+  trade:
+    description: Trade command
+    aliases:
+      - t
+    permission: guardian.player
+    permission-message: You do not have permission!
+  party:
+    description: Party command
+    aliases:
+      - pt
+    permission: guardian.player
+    permission-message: You do not have permission!
+  pm:
+    description: Private message command
+    permission: guardian.player
+    permission-message: You do not have permission!
+  minigame:
+    description: Minigame command
+    aliases:
+      - mg
+    permission: guardian.player
+    permission-message: You do not have permission!
+  reward:
+    description: Job command
+    permission: guardian.player
+    permission-message: You do not have permission!
+  character:
+    description: Character command
+    permission: guardian.player
+    permission-message: You do not have permission!
+  rp:
+    description: Resource pack command
+    permission: guardian.player
+    permission-message: You do not have permission!
+  language:
+    description: Language command
+    permission: guardian.player
+    permission-message: You do not have permission!
+  interact:
+    description: Interact command
+    permission: guardian.player
+    permission-message: You do not have permission!
+  safe-stop:
+    description: Safely shuts down the server
+    permission: guardian.admin
+  emojis:
+    description: Emoji command
+    permission: guardian.player
+    permission-message: You do not have permission!
+  build:
+    description: Build command
+    permission: guardian.player
+    permission-message: You do not have permission!
+  admininteractable:
+    description: AdminInteractable command
+    permission: guardian.admin
+    permission-message: You do not have permission!
+permissions:
+  guardian.player:
+    description: GuardiansOfAdelia permission for player commands
+    default: true
+  guardian.admin:
+    description: GuardiansOfAdelia permission for admin commands
+    default: false
+  guardian.*:
+    description: Wildcard permission
+    default: false
+    children:
+      guardian.admin: true
+      guardian.player: true

@@ -1,0 +1,46 @@
+# ---------------------------------------------- #
+#               Jobs Configuration               #
+# ---------------------------------------------- #
+#                    Crafting                    #
+# ---------------------------------------------- #
+
+level1:
+  itemSet1:
+    weaponGearType:
+      - SPEAR
+      - BOW
+      - CROSSBOW
+      - STAFF
+      - WAND
+    gearLevel: 0
+    index: 0
+    tier: MYSTIC
+    gearSet: "Smith's"
+    ingredients:
+      - 8
+      - 4
+      - 9
+    ingredientAmounts:
+      - 10
+      - 8
+      - 6
+level2:
+  itemSet1:
+    weaponGearType:
+      - SPEAR
+      - BOW
+      - CROSSBOW
+      - STAFF
+      - WAND
+    gearLevel: 1
+    index: 0
+    tier: MYSTIC
+    gearSet: "Smith's"
+    ingredients:
+      - 8
+      - 4
+      - 9
+    ingredientAmounts:
+      - 15
+      - 12
+      - 9

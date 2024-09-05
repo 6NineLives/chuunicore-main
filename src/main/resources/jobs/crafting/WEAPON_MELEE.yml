@@ -1,0 +1,45 @@
+# ---------------------------------------------- #
+#               Jobs Configuration               #
+# ---------------------------------------------- #
+#                    Crafting                    #
+# ---------------------------------------------- #
+level1:
+  itemSet1:
+    weaponGearType:
+      - SWORD
+      - DAGGER
+      - BATTLE_AXE
+      - WAR_HAMMER
+      - GREAT_SWORD
+    gearLevel: 0
+    index: 0
+    tier: MYSTIC
+    gearSet: "Smith's"
+    ingredients:
+      - 9
+      - 8
+      - 3
+    ingredientAmounts:
+      - 10
+      - 8
+      - 6
+level2:
+  itemSet1:
+    weaponGearType:
+      - SWORD
+      - DAGGER
+      - BATTLE_AXE
+      - WAR_HAMMER
+      - GREAT_SWORD
+    gearLevel: 1
+    index: 0
+    tier: MYSTIC
+    gearSet: "Smith's"
+    ingredients:
+      - 9
+      - 8
+      - 3
+    ingredientAmounts:
+      - 15
+      - 12
+      - 9

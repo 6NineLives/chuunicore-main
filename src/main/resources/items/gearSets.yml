@@ -1,0 +1,14 @@
+# ---------------------------------------------- #
+#             Database Configuration             #
+# ---------------------------------------------- #
+#                   GearSets                     #
+# ---------------------------------------------- #
+
+set1:
+  name: "Tutorial"
+  effectsAt5:
+    - "CRITICAL_CHANCE"
+set2:
+  name: "Craftsman's"
+  effectsAt5:
+    - "CRITICAL_CHANCE"

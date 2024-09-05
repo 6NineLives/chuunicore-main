@@ -1,0 +1,42 @@
+# ---------------------------------------------- #
+#               Jobs Configuration               #
+# ---------------------------------------------- #
+#                    Crafting                    #
+# ---------------------------------------------- #
+
+level1:
+  itemSet1:
+    armorGearType:
+      - LIGHT_ARMOR
+      - FEATHER_ARMOR
+      - CLOTH_ARMOR
+    gearLevel: 0
+    index: 0
+    tier: MYSTIC
+    gearSet: "Smith's"
+    ingredients:
+      - 3
+      - 4
+      - 9
+    ingredientAmounts:
+      - 8
+      - 6
+      - 6
+level2:
+  itemSet1:
+    armorGearType:
+      - LIGHT_ARMOR
+      - FEATHER_ARMOR
+      - CLOTH_ARMOR
+    gearLevel: 1
+    index: 0
+    tier: MYSTIC
+    gearSet: "Smith's"
+    ingredients:
+      - 3
+      - 4
+      - 9
+    ingredientAmounts:
+      - 12
+      - 9
+      - 9

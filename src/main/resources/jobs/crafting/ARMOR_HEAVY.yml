@@ -1,0 +1,36 @@
+# ---------------------------------------------- #
+#               Jobs Configuration               #
+# ---------------------------------------------- #
+#                    Crafting                    #
+# ---------------------------------------------- #
+
+level1:
+  itemSet1:
+    armorGearType:
+      - HEAVY_ARMOR
+      - PLATE_ARMOR
+    gearLevel: 0
+    index: 0
+    tier: MYSTIC
+    gearSet: "Smith's"
+    ingredients:
+      - 1
+      - 2
+    ingredientAmounts:
+      - 12
+      - 8
+level2:
+  itemSet1:
+    armorGearType:
+      - HEAVY_ARMOR
+      - PLATE_ARMOR
+    gearLevel: 1
+    index: 0
+    tier: MYSTIC
+    gearSet: "Smith's"
+    ingredients:
+      - 1
+      - 2
+    ingredientAmounts:
+      - 18
+      - 12

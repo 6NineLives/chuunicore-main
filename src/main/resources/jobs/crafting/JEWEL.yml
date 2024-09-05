@@ -1,0 +1,40 @@
+# ---------------------------------------------- #
+#               Jobs Configuration               #
+# ---------------------------------------------- #
+#                    Crafting                    #
+# ---------------------------------------------- #
+
+level1:
+  itemSet1:
+    slotTypes:
+      - RING
+      - EARRING
+      - NECKLACE
+      - GLOVE
+    gearLevel: 0
+    index: 0
+    tier: MYSTIC
+    gearSet: "Smith's"
+    ingredients:
+      - 9
+      - 10
+    ingredientAmounts:
+      - 8
+      - 3
+level2:
+  itemSet1:
+    slotTypes:
+      - EARRING
+      - NECKLACE
+      - GLOVE
+      - RING
+    gearLevel: 1
+    index: 0
+    tier: MYSTIC
+    gearSet: "Smith's"
+    ingredients:
+      - 9
+      - 10
+    ingredientAmounts:
+      - 12
+      - 5

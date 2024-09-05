@@ -1,0 +1,100 @@
+package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
+
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AbsorptionHeartMechanic extends MechanicComponent {
+
+    private final List<Integer> heartAmountList;
+    private final List<Integer> maxHeartList;
+
+    public AbsorptionHeartMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
+        if (!configurationSection.contains("heartAmountList")) {
+            configLoadError("heartAmountList");
+        }
+
+        if (configurationSection.contains("heartAmountList")) {
+            this.heartAmountList = configurationSection.getIntegerList("heartAmountList");
+        } else {
+            this.heartAmountList = new ArrayList<>();
+        }
+
+        if (configurationSection.contains("maxHeartList")) {
+            this.maxHeartList = configurationSection.getIntegerList("maxHeartList");
+        } else {
+            this.maxHeartList = new ArrayList<>();
+        }
+    }
+
+    @Override
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
+        if (targets.isEmpty()) return false;
+
+        boolean healed = false;
+        for (LivingEntity ent : targets) {
+            if (!(ent instanceof Player)) continue;
+            Player player = (Player) ent;
+
+            float currentHearts = (float) player.getAbsorptionAmount();
+
+            int maxHearts = 99;
+            if (!maxHeartList.isEmpty()) {
+                maxHearts = maxHeartList.get(skillLevel - 1);
+            }
+
+            if (currentHearts >= maxHearts) continue;
+
+            int heartAmount = 0;
+            if (!heartAmountList.isEmpty()) {
+                heartAmount = heartAmountList.get(skillLevel - 1);
+            }
+
+            if (heartAmount <= 0) {
+                return false;
+            }
+
+            float nextHeart = currentHearts + heartAmount;
+
+            if (nextHeart > maxHearts) {
+                nextHeart = maxHearts;
+            }
+
+            player.setAbsorptionAmount(nextHeart);
+            healed = true;
+        }
+
+        return healed;
+    }
+
+    @Override
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
+
+        if (!heartAmountList.isEmpty()) {
+            if (skillLevel == 0) {
+                String lore = ChatPalette.GOLD + "Golden Heart: +" + heartAmountList.get(skillLevel) + "[Max " + maxHeartList.get(skillLevel) + "]";
+
+                additions.add(lore);
+            } else if (skillLevel == heartAmountList.size()) {
+                String lore = ChatPalette.GOLD + "Golden Heart: +" + heartAmountList.get(skillLevel - 1) + "[Max " + maxHeartList.get(skillLevel - 1) + "]";
+
+                additions.add(lore);
+            } else {
+                String lore1 = ChatPalette.GOLD + "Golden Heart: +" + heartAmountList.get(skillLevel - 1) + "[Max " + maxHeartList.get(skillLevel - 1) + "]";
+                String lore2 = heartAmountList.get(skillLevel) + "[Max " + maxHeartList.get(skillLevel) + "]";
+
+                additions.add(ChatPalette.GOLD + lore1 + " -> " + lore2);
+            }
+        }
+
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
+    }
+}

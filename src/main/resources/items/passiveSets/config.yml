@@ -1,0 +1,17 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemSetList:
+  - "passiveSet_0"
+  - "passiveSet_10"
+  - "passiveSet_20"
+  - "passiveSet_30"
+  - "passiveSet_40"
+  - "passiveSet_50"
+  - "passiveSet_60"
+  - "passiveSet_70"
+  - "passiveSet_80"
+

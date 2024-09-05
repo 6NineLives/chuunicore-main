@@ -1,0 +1,24 @@
+# ---------------------------------------------- #
+#               Jobs Configuration               #
+# ---------------------------------------------- #
+#                 Ingredients                    #
+# ---------------------------------------------- #
+
+m1:
+  mobKey: "Cow1"
+  ingredients:
+    - 1
+    - 3
+m2:
+  mobKey: "Sheep1"
+  ingredients:
+    - 1
+    - 4
+m3:
+  mobKey: "SlimeSmall"
+  ingredients:
+    - 7
+m4:
+  mobKey: "SlimeMedium"
+  ingredients:
+    - 7

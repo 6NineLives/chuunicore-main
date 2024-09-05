@@ -1,0 +1,244 @@
+package io.github.lix3nn53.guardiansofadelia.utilities.config;
+
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
+import io.github.lix3nn53.guardiansofadelia.towns.Town;
+import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
+import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.ArmorStand;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class ConfigManager {
+
+    static File DATA_FOLDER;
+    private static FileConfiguration characterSelectionConfig;
+    private static FileConfiguration townsConfig;
+    private static FileConfiguration hologramsConfig;
+
+    public static void init() {
+        if (!GuardiansOfAdelia.getInstance().getDataFolder().exists()) {
+            GuardiansOfAdelia.getInstance().getDataFolder().mkdirs();
+        }
+        DATA_FOLDER = GuardiansOfAdelia.getInstance().getDataFolder();
+    }
+
+    public static void createConfigALL() {
+        characterSelectionConfig = ConfigurationUtils.createConfig(DATA_FOLDER.toString(), "characterSelection.yml");
+        townsConfig = ConfigurationUtils.createConfig(DATA_FOLDER + File.separator + "world", "towns.yml");
+        hologramsConfig = ConfigurationUtils.createConfig(DATA_FOLDER + File.separator + "world", "holograms.yml");
+
+        RewardDailyConfigurations.createConfigs();
+        JobGatheringConfigurations.createConfigs();
+        TeleportPortalsConfiguration.createConfig();
+        TeleportGuiConfiguration.createConfig();
+        DatabaseConfiguration.createConfigs();
+        SkillOnGroundConfigurations.createConfigs();
+        DungeonConfiguration.createConfigs();
+        ItemArmorSetConfigurations.createConfigs();
+        ItemPassiveSetConfigurations.createConfigs();
+        ItemShieldSetConfigurations.createConfigs();
+        ItemWeaponSetConfigurations.createConfigs();
+        JobCraftingConfigurations.createConfigs();
+        QuestConfigurations.createConfigs();
+        PetConfigurations.createConfigs();
+        LootChestConfiguration.createConfigs();
+        GearSetConfiguration.createConfigs();
+        MobConfigurations.createConfigs();
+        MerchantConfiguration.createConfigs();
+        TranslationConfigurations.createConfigs();
+        NPCConfiguration.createConfigs();
+        ItemSkillConfigurations.createConfigs();
+        GlobalMessageConfigurations.createConfig();
+        EmojiConfiguration.createConfigs();
+        CosmeticsConfiguration.createConfigs();
+        GenericInteractableConfiguration.createConfigs();
+    }
+
+    public static void loadConfigALL() {
+        TranslationConfigurations.loadConfigs();
+        ClassConfigurations.loadConfigs();
+        RewardDailyConfigurations.loadConfigs();
+        JobGatheringConfigurations.loadConfigs();
+        loadResourcePackConfig();
+        loadCharacterSelectionConfig();
+        loadTowns();
+        TeleportPortalsConfiguration.loadConfig();
+        TeleportGuiConfiguration.loadConfig();
+        DatabaseConfiguration.loadConfigs();
+        SkillOnGroundConfigurations.loadConfigs();
+        GenericInteractableConfiguration.loadConfigs();
+        DungeonConfiguration.loadConfigs();
+        ItemArmorSetConfigurations.loadConfigs();
+        ItemPassiveSetConfigurations.loadConfigs();
+        ItemShieldSetConfigurations.loadConfigs();
+        ItemWeaponSetConfigurations.loadConfigs();
+        JobCraftingConfigurations.loadConfigs();
+        PetConfigurations.loadConfigs();
+        QuestConfigurations.loadConfigs();
+        LootChestConfiguration.loadConfigs();
+        GearSetConfiguration.loadConfig();
+        MobConfigurations.loadConfigs();
+        MerchantConfiguration.loadConfigs();
+        NPCConfiguration.loadConfigs();
+        ItemSkillConfigurations.loadConfigs();
+        GlobalMessageConfigurations.loadConfig();
+        loadHologramsConfig();
+        EmojiConfiguration.loadConfigs();
+        CosmeticsConfiguration.loadConfigs();
+    }
+
+    public static void writeConfigALL() {
+        RewardDailyConfigurations.writeConfigs();
+        LootChestConfiguration.writeConfigs();
+        JobGatheringConfigurations.writeConfigs();
+        DungeonConfiguration.writeConfigs();
+        GenericInteractableConfiguration.writeConfigs();
+    }
+
+    public static void loadResourcePackConfig() {
+        String resourcePack = Bukkit.getResourcePack();
+        String resourcePackHash = Bukkit.getResourcePackHash();
+        String resourcePackPrompt = Bukkit.getResourcePackPrompt();
+
+        GuardiansOfAdelia.getInstance().getLogger().info("RESOURCE_PACK: " + resourcePack);
+        GuardiansOfAdelia.getInstance().getLogger().info("RESOURCE_PACK HASH: " + resourcePackHash);
+        GuardiansOfAdelia.getInstance().getLogger().info("RESOURCE_PACK PROMPT: " + resourcePackPrompt);
+
+        GuardiansOfAdelia.ResourcePackURL = resourcePack;
+    }
+
+    public static void loadHologramsConfig() {
+        for (int i = 1; i <= 999; i++) {
+            boolean contains = hologramsConfig.contains("Hologram" + i + ".world");
+
+            if (!contains) break;
+
+            String worldString = hologramsConfig.getString("Hologram" + i + ".world");
+            if (worldString == null) continue;
+
+            World world = Bukkit.getWorld(worldString);
+            float x = (float) hologramsConfig.getDouble("Hologram" + i + ".x");
+            float y = (float) hologramsConfig.getDouble("Hologram" + i + ".y");
+            float z = (float) hologramsConfig.getDouble("Hologram" + i + ".z");
+            Location location = new Location(world, x, y, z);
+
+            List<String> texts = hologramsConfig.getStringList("Hologram" + i + ".texts");
+
+            for (int index = texts.size() - 1; index >= 0; index--) {
+                String text = texts.get(index);
+
+                String s = ChatColor.translateAlternateColorCodes('&', text);
+                Hologram hologram = new Hologram(location.clone(), s);
+                location.add(0, 0.4, 0);
+
+                HologramManager.addHologram(hologram);
+            }
+
+            if (hologramsConfig.contains("Hologram" + i + ".background")) {
+                String backgroundStr = hologramsConfig.getString("Hologram" + i + ".background");
+                CustomCharacter background = CustomCharacter.valueOf(backgroundStr);
+                Hologram hologram = new Hologram(location.clone(), background.toString());
+                HologramManager.addHologram(hologram);
+            }
+        }
+    }
+
+    private static void loadCharacterSelectionConfig() {
+        List<Location> locationList = new ArrayList<>();
+        for (int i = 1; i < 9; i++) {
+            String worldName = characterSelectionConfig.getString("characterSelectionHologram" + i + ".world");
+            float x = (float) characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".x");
+            float y = (float) characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".y");
+            float z = (float) characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".z");
+            float yaw = (float) characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".yaw");
+            float pitch = (float) characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".pitch");
+            Location location = new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);
+            locationList.add(location);
+        }
+
+        CharacterSelectionScreenManager.setArmorStandLocationBases(locationList);
+
+        String worldNameCenter = characterSelectionConfig.getString("characterSelection" + "Center" + ".world");
+        float xCenter = (float) characterSelectionConfig.getDouble("characterSelection" + "Center" + ".x");
+        float yCenter = (float) characterSelectionConfig.getDouble("characterSelection" + "Center" + ".y");
+        float zCenter = (float) characterSelectionConfig.getDouble("characterSelection" + "Center" + ".z");
+        float yawCenter = (float) characterSelectionConfig.getDouble("characterSelection" + "Center" + ".yaw");
+        float pitchCenter = (float) characterSelectionConfig.getDouble("characterSelection" + "Center" + ".pitch");
+        Location locationCenter = new Location(Bukkit.getWorld(worldNameCenter), xCenter, yCenter, zCenter, yawCenter, pitchCenter);
+        CharacterSelectionScreenManager.setCharacterSelectionCenter(locationCenter);
+
+        String worldNameTuto = characterSelectionConfig.getString("tutorialStart" + ".world");
+        float xTuto = (float) characterSelectionConfig.getDouble("tutorialStart" + ".x");
+        float yTuto = (float) characterSelectionConfig.getDouble("tutorialStart" + ".y");
+        float zTuto = (float) characterSelectionConfig.getDouble("tutorialStart" + ".z");
+        float yawTuto = (float) characterSelectionConfig.getDouble("tutorialStart" + ".yaw");
+        float pitchTuto = (float) characterSelectionConfig.getDouble("tutorialStart" + ".pitch");
+        Location locationTuto = new Location(Bukkit.getWorld(worldNameTuto), xTuto, yTuto, zTuto, yawTuto, pitchTuto);
+        CharacterSelectionScreenManager.setTutorialStart(locationTuto);
+    }
+
+    private static void writeCharacterSelectionConfig() {
+        Location characterSelectionCenter = CharacterSelectionScreenManager.getCharacterSelectionCenter();
+        characterSelectionConfig.set("characterSelection" + "Center" + ".world", characterSelectionCenter.getWorld().getName());
+        characterSelectionConfig.set("characterSelection" + "Center" + ".x", characterSelectionCenter.getX());
+        characterSelectionConfig.set("characterSelection" + "Center" + ".y", characterSelectionCenter.getY());
+        characterSelectionConfig.set("characterSelection" + "Center" + ".z", characterSelectionCenter.getZ());
+        characterSelectionConfig.set("characterSelection" + "Center" + ".yaw", characterSelectionCenter.getYaw());
+        characterSelectionConfig.set("characterSelection" + "Center" + ".pitch", characterSelectionCenter.getPitch());
+
+        Location tutorialStart = CharacterSelectionScreenManager.getTutorialStart();
+        characterSelectionConfig.set("tutorialStart" + ".world", tutorialStart.getWorld().getName());
+        characterSelectionConfig.set("tutorialStart" + ".x", tutorialStart.getX());
+        characterSelectionConfig.set("tutorialStart" + ".y", tutorialStart.getY());
+        characterSelectionConfig.set("tutorialStart" + ".z", tutorialStart.getZ());
+        characterSelectionConfig.set("tutorialStart" + ".yaw", tutorialStart.getYaw());
+        characterSelectionConfig.set("tutorialStart" + ".pitch", tutorialStart.getPitch());
+
+        HashMap<Integer, List<ArmorStand>> characterNoToArmorStands = CharacterSelectionScreenManager.getCharacterNoToArmorStands();
+        for (Integer i : characterNoToArmorStands.keySet()) {
+            Location location = characterNoToArmorStands.get(i).get(0).getLocation();
+            characterSelectionConfig.set("characterSelectionHologram" + i + ".world", location.getWorld().getName());
+            characterSelectionConfig.set("characterSelectionHologram" + i + ".x", location.getX());
+            characterSelectionConfig.set("characterSelectionHologram" + i + ".y", location.add(0.0, -0.4, 0.0).getY());
+            characterSelectionConfig.set("characterSelectionHologram" + i + ".z", location.getZ());
+            characterSelectionConfig.set("characterSelectionHologram" + i + ".yaw", location.getYaw());
+            characterSelectionConfig.set("characterSelectionHologram" + i + ".pitch", location.getPitch());
+        }
+        try {
+            characterSelectionConfig.save(ConfigManager.DATA_FOLDER + "/characterSelection.yml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadTowns() {
+        for (int i = 1; i < 1000; i++) {
+            boolean contains = townsConfig.contains("town" + i);
+            if (!contains) break;
+
+            String townName = townsConfig.getString("town" + i + ".name");
+            int level = townsConfig.getInt("town" + i + ".level");
+            String worldName = townsConfig.getString("town" + i + ".world");
+            float x = (float) townsConfig.getDouble("town" + i + ".x");
+            float y = (float) townsConfig.getDouble("town" + i + ".y");
+            float z = (float) townsConfig.getDouble("town" + i + ".z");
+            float yaw = (float) townsConfig.getDouble("town" + i + ".yaw");
+            float pitch = (float) townsConfig.getDouble("town" + i + ".pitch");
+            Location location = new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);
+            Town town = new Town(townName, location, level);
+            TownManager.addTown(town, i);
+        }
+    }
+}

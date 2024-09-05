@@ -1,0 +1,528 @@
+# ---------------------------------------------- #
+#            Quest list Configuration            #
+# ---------------------------------------------- #
+#                     Quests                     #
+# ---------------------------------------------- #
+
+color: "BLUE_DARKER"
+mainElement: "WATER"
+description:
+  - "Todo"
+classIconCustomModelData: 37
+attributeElementDamage: 7
+attributeElementDefense: 5
+attributeMaxHealth: 5
+attributeMaxMana: 6
+attributeCriticalChance: 2
+weaponGearTypes:
+  - "WAND"
+  - "STAFF"
+  - "DAGGER"
+armorGearTypes:
+  - "CLOTH_ARMOR"
+  - "FEATHER_ARMOR"
+  - "LIGHT_ARMOR"
+actionBarInfoType: "VARIABLE"
+actionBarIcon: "&b⏺"
+actionBarKey: "potionpassive"
+skillOne:
+  name: "Poison Potion"
+  customModelData: 39
+  description:
+    - "Throw a potion which explode on impact and create a cloud."
+    - "The cloud deals damage to enemies every second."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+  cooldowns:
+    - 8
+    - 8
+    - 8
+    - 8
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&bPoison Potion!"
+      child1:
+        componentType: "ProjectileMechanic"
+        projectileClass: "SplashPotion"
+        spreadType: "CONE"
+        speed: 0.8
+        amountList:
+          - 1
+          - 1
+          - 1
+          - 1
+        angle: 360
+        range: 200
+        mustHitToWork: false
+        particle:
+          arrangementType: "FillHemisphere"
+          particleType: "REDSTONE"
+          dustColor: 10040319
+          dustSize: 1
+          radius: 0.2
+          amount: 2
+        isProjectileInvisible: false
+        child1:
+          componentType: "RepeatMechanic"
+          period: 20
+          repetitions:
+            - 12
+            - 14
+            - 16
+            - 20
+          child1:
+            componentType: "AreaTarget"
+            allies: false
+            enemy: true
+            self: false
+            max: 30
+            radiusList:
+              - 4.0
+              - 4.25
+              - 4.5
+              - 5
+            amountList:
+              - 18
+              - 20
+              - 22
+              - 24
+            particle:
+              particleType: "REDSTONE"
+              dustColor: 10040319
+              dustSize: 2
+            child1:
+              componentType: "DamageMechanic"
+              damageType: "LIGHTNING"
+              damageList:
+                - 5
+                - 10
+                - 15
+                - 20
+              damageMultiplyList:
+                - 0.15
+                - 0.2
+                - 0.25
+                - 0.3
+          child2:
+            componentType: "ParticleMechanic"
+            particle:
+              arrangementType: "FillCircle"
+              particleType: "REDSTONE"
+              dustColor: 10040319
+              dustSize: 2
+              radius: 2.5
+              amount: 18
+              direction: "XZ"
+            data1:
+              - 4.0
+              - 4.25
+              - 4.5
+              - 5
+skillTwo:
+  name: "Heal Potion"
+  customModelData: 33
+  description:
+    - "Throw a potion which explode on impact and create a cloud."
+    - "The cloud heals allies and gives life steal to allies every second."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+  cooldowns:
+    - 16
+    - 16
+    - 16
+    - 16
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&bPoison Potion!"
+      child1:
+        componentType: "ProjectileMechanic"
+        projectileClass: "SplashPotion"
+        spreadType: "CONE"
+        speed: 0.8
+        amountList:
+          - 1
+          - 1
+          - 1
+          - 1
+        angle: 360
+        range: 200
+        mustHitToWork: false
+        particle:
+          arrangementType: "FillHemisphere"
+          particleType: "HEART"
+          radius: 0.2
+          amount: 1
+        isProjectileInvisible: false
+        child1:
+          componentType: "AreaTarget"
+          allies: true
+          enemy: false
+          self: true
+          max: 30
+          radiusList:
+            - 4.0
+            - 4.25
+            - 4.5
+            - 5
+          amountList:
+            - 18
+            - 20
+            - 22
+            - 24
+          particle:
+            particleType: "HEART"
+          child1:
+            componentType: "HealMechanic"
+            healPercentList:
+              - 0.2
+              - 0.25
+              - 0.3
+              - 0.35
+          child2:
+            componentType: "BuffMechanic"
+            buffType: "LIFE_STEAL"
+            multipliers:
+              - 0.1
+              - 0.15
+              - 0.2
+              - 0.25
+            ticks:
+              - 200
+              - 250
+              - 300
+              - 350
+        child2:
+          componentType: "ParticleMechanic"
+          particle:
+            arrangementType: "FillSphere"
+            particleType: "HEART"
+            radius: 2.5
+            amount: 12
+            amounty: 7
+          data1:
+            - 4.0
+            - 4.25
+            - 4.5
+            - 5
+skillThree:
+  name: "Buff Potion"
+  customModelData: 47
+  description:
+    - "Become invincible and gain movement speed bonus."
+    - "Effect is canceled if you cast spell or attack an enemy."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+  cooldowns:
+    - 16
+    - 16
+    - 16
+    - 16
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&bPoison Potion!"
+      child1:
+        componentType: "ProjectileMechanic"
+        projectileClass: "SplashPotion"
+        spreadType: "CONE"
+        speed: 0.8
+        amountList:
+          - 1
+          - 1
+          - 1
+          - 1
+        angle: 360
+        range: 200
+        mustHitToWork: false
+        particle:
+          arrangementType: "FillHemisphere"
+          particleType: "REDSTONE"
+          dustColor: 5636095
+          dustSize: 2
+          radius: 0.2
+          amount: 1
+        isProjectileInvisible: false
+        child1:
+          componentType: "AreaTarget"
+          allies: true
+          enemy: true
+          self: true
+          max: 30
+          radiusList:
+            - 4.0
+            - 4.25
+            - 4.5
+            - 5
+          amountList:
+            - 9
+            - 10
+            - 11
+            - 12
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 5636095
+            dustSize: 2
+          child1:
+            componentType: "FilterCurrentTargets"
+            allies: true
+            enemy: false
+            self: true
+            max: 29
+            child2:
+              componentType: "BuffMechanic"
+              buffType: "ELEMENT_DEFENSE"
+              multipliers:
+                - 0.1
+                - 0.15
+                - 0.2
+                - 0.25
+              ticks:
+                - 200
+                - 250
+                - 300
+                - 350
+          child2:
+            componentType: "FilterCurrentTargets"
+            allies: false
+            enemy: true
+            self: false
+            max: 29
+            child2:
+              componentType: "BuffMechanic"
+              buffType: "ELEMENT_DEFENSE"
+              multipliers:
+                - -0.1
+                - -0.15
+                - -0.2
+                - -0.25
+              ticks:
+                - 200
+                - 250
+                - 300
+                - 350
+        child2:
+          componentType: "ParticleMechanic"
+          particle:
+            arrangementType: "FillSphere"
+            particleType: "REDSTONE"
+            dustColor: 5636095
+            dustSize: 2
+            radius: 2.5
+            amount: 12
+            amounty: 7
+          data1:
+            - 4.0
+            - 4.25
+            - 4.5
+            - 5
+skillPassive:
+  name: "Drink Potion"
+  customModelData: 52
+  description:
+    - "Every time you cast a spell gain a stack."
+    - "If you have 4 stacks drink a potion after casting"
+    - "your next skill and gain movement speed."
+  manaCosts:
+    - 0
+    - 0
+    - 0
+    - 0
+  cooldowns:
+    - 4
+    - 4
+    - 4
+    - 4
+  trigger:
+    componentType: "InitializeTrigger"
+    child1:
+      componentType: "SkillCastTrigger"
+      cooldowns:
+        - 1
+        - 1
+        - 1
+        - 1
+      child1:
+        componentType: "ValueCondition"
+        key: "potionpassive"
+        minValue: 3
+        maxValue: 3
+        checkCasterOnly: true
+        child1:
+          componentType: "PotionEffectMechanic"
+          potionEffectType:
+            - "SPEED"
+          tickList:
+            - 80
+            - 100
+            - 120
+            - 150
+          amplifierList:
+            - 3
+            - 3
+            - 3
+            - 3
+        child2:
+          componentType: "ParticleAnimationMechanic"
+          particle:
+            arrangementType: "FillCircle"
+            particleType: "SPELL_WITCH"
+            radius: 0.2
+            amount: 6
+            direction: "XZ"
+          frequency: 3
+          repeatAmount:
+            - 12
+            - 14
+            - 16
+            - 18
+            - 20
+            - 24
+          data1:
+            - 0.2
+            - 0.2
+            - 0.2
+            - 0.2
+        child3:
+          componentType: "SoundMechanic"
+          sound: "SKILL.SONIC_BOOM"
+          volume: 1.0
+          pitch: 1.0
+        child4:
+          componentType: "ValueSetMechanic"
+          key: "potionpassive"
+          values:
+            - 0
+            - 0
+            - 0
+            - 0
+      child2:
+        componentType: "ValueCondition"
+        key: "potionpassive"
+        minValue: 0
+        maxValue: 3
+        checkCasterOnly: true
+        child1:
+          componentType: "SelfTarget"
+          child1:
+            componentType: "ValueAddMechanic"
+            key: "potionpassive"
+            valueToAdd:
+              - 1
+              - 1
+              - 1
+              - 1
+skillUltimate:
+  name: "Explosive Potion"
+  customModelData: 62
+  description:
+    - "Stun yourself and a single enemy."
+    - "After the duration of stun end, deal damage to enemy."
+    - "Consumes potionpassive to increase damage."
+  manaCosts:
+    - 5
+    - 5
+    - 5
+    - 5
+  cooldowns:
+    - 8
+    - 8
+    - 8
+    - 8
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&bExplosive Potion!"
+      child1:
+        componentType: "ProjectileMechanic"
+        projectileClass: "SplashPotion"
+        spreadType: "CONE"
+        speed: 0.8
+        amountList:
+          - 1
+          - 1
+          - 1
+          - 1
+        angle: 360
+        range: 200
+        mustHitToWork: false
+        particle:
+          arrangementType: "FillHemisphere"
+          particleType: "FLAME"
+          dustSize: 1
+          radius: 0.2
+          amount: 2
+        isProjectileInvisible: false
+        child1:
+          componentType: "AreaTarget"
+          allies: false
+          enemy: true
+          self: false
+          max: 30
+          keepCurrent: true
+          radiusList:
+            - 4.0
+            - 4.25
+            - 4.5
+            - 5
+          amountList:
+            - 24
+            - 24
+            - 24
+            - 24
+          particle:
+            particleType: "FLAME"
+          child1:
+            componentType: "DamageMechanic"
+            damageType: "FIRE"
+            damageList:
+              - 10
+              - 40
+              - 90
+              - 180
+            damageMultiplyList:
+              - 1.4
+              - 1.6
+              - 1.8
+              - 2.2
+          child2:
+            componentType: "PushMechanic"
+            pushType: "FIXED"
+            speedList:
+              - 1.2
+              - 1.4
+              - 1.6
+              - 1.8
+            centerSelf: false
+            offsetY: -2
+        child2:
+          componentType: "ParticleMechanic"
+          particle:
+            arrangementType: "FillSphere"
+            particleType: "FLAME"
+            radius: 2.5
+            amount: 12
+            amounty: 7
+          data1:
+            - 4.0
+            - 4.25
+            - 4.5
+            - 5

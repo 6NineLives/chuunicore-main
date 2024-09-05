@@ -1,0 +1,198 @@
+# ---------------------------------------------- #
+#            Quest list Configuration            #
+# ---------------------------------------------- #
+#                     Quests                     #
+# ---------------------------------------------- #
+
+quest1:
+  questID: 1
+  npcToTakeFrom: 0
+  npcToComplete: 9
+  name: "Entrance to the unknown"
+  story:
+    - "Adelia had been living in peace for a long time so"
+    - "the need for Guardians decreased over time."
+    - "You are one of a few Guardians of this era."
+    - "Suddenly a strange dark castle appeared"
+    - "in wild lands of Adelia."
+    - "Can Adelia overcome this threat after such a long time?"
+  startMsg: "&eHold &l&6TAB KEY &r&eto see your quest list!"
+  objectiveTextList:
+    - "Talk to Arnas to get your equipment!"
+  turnInMsg: "Accept your new quest from Arnas"
+  moneyPrize: 0
+  expPrize: 0
+  requiredLevel: 90
+  advancementMaterial: "RED_NETHER_BRICKS"
+  itemPrizeSelectOneOfWeapon:
+    gearLevel: 9
+    itemIndex: 0
+    itemTier: "LEGENDARY"
+    gearSet: "Tutorial"
+  itemPrize1:
+    itemType: Consumable
+    consumable: POTION_INSTANT_HEALTH
+    skillLevel: 10
+    uses: 10
+  itemPrize2:
+    itemType: Consumable
+    consumable: POTION_INSTANT_MANA
+    skillLevel: 10
+    uses: 10
+  itemPrizeForPlayerArmor1:
+    armorSlot: HELMET
+    itemTier: "LEGENDARY"
+    gearLevel: 8
+    itemIndex: 0
+    gearSet: "Tutorial"
+  itemPrizeForPlayerArmor2:
+    armorSlot: CHESTPLATE
+    itemTier: "LEGENDARY"
+    gearLevel: 8
+    itemIndex: 0
+    gearSet: "Tutorial"
+  itemPrizeForPlayerArmor3:
+    armorSlot: LEGGINGS
+    itemTier: "LEGENDARY"
+    gearLevel: 8
+    itemIndex: 0
+    gearSet: "Tutorial"
+  itemPrizeForPlayerArmor4:
+    armorSlot: BOOTS
+    itemTier: "LEGENDARY"
+    gearLevel: 8
+    itemIndex: 0
+    gearSet: "Tutorial"
+quest2:
+  questID: 2
+  npcToTakeFrom: 9
+  npcToComplete: 10
+  name: "To the rescue"
+  story:
+    - "We need more guardians to deal"
+    - "with darkness' foes!"
+  startMsg: "Learn your skills to get ready! Open menu by clicking Menu-Book from your inventory(E key), then learn your skills from character menu to get ready to fight!"
+  objectiveTextList:
+    - "TASK_PROGRESS_1 then talk to Elysea"
+  turnInMsg: "Accept your new quest from Elysea"
+  moneyPrize: 0
+  expPrize: 0
+  requiredLevel: 90
+  requiredQuests:
+    - 1
+  advancementMaterial: "RED_NETHER_BRICKS"
+  task1:
+    taskType: "TaskKill"
+    mobKey: "TutorialSoldier"
+    amountNeeded: 5
+quest3:
+  questID: 3
+  npcToTakeFrom: 10
+  npcToComplete: 11
+  name: "Syvia's gift"
+  story:
+    - "We need more guardians to deal"
+    - "with darkness' foes!"
+  startMsg: "Spend your stat points from character-menu to get stronger."
+  objectiveTextList:
+    - "TASK_PROGRESS_1 then talk to Syvia"
+  turnInMsg: "Equip jewelries from RPG-Inventory to gain bonus stats! To open RPG-Inventory click one of crafting slots from your inventory."
+  moneyPrize: 0
+  expPrize: 0
+  requiredLevel: 90
+  requiredQuests:
+    - 2
+  advancementMaterial: "RED_NETHER_BRICKS"
+  task1:
+    taskType: "TaskKill"
+    mobKey: "TutorialArcher"
+    amountNeeded: 5
+  itemPrize1:
+    itemType: "Passive"
+    gearLevel: 8
+    itemIndex: 0
+    rpgSlotType: "PARROT"
+    itemTier: "LEGENDARY"
+    gearSet: "Tutorial"
+  itemPrize2:
+    itemType: "Passive"
+    gearLevel: 8
+    itemIndex: 0
+    rpgSlotType: "EARRING"
+    itemTier: "LEGENDARY"
+    gearSet: "Tutorial"
+  itemPrize3:
+    itemType: "Passive"
+    gearLevel: 8
+    itemIndex: 0
+    rpgSlotType: "GLOVE"
+    itemTier: "LEGENDARY"
+    gearSet: "Tutorial"
+  itemPrize4:
+    itemType: "Passive"
+    gearLevel: 8
+    itemIndex: 0
+    rpgSlotType: "RING"
+    itemTier: "LEGENDARY"
+    gearSet: "Tutorial"
+  itemPrize5:
+    itemType: "Passive"
+    gearLevel: 8
+    itemIndex: 0
+    rpgSlotType: "NECKLACE"
+    itemTier: "LEGENDARY"
+    gearSet: "Tutorial"
+quest4:
+  questID: 4
+  npcToTakeFrom: 11
+  npcToComplete: 0
+  name: "Tower of Darkness"
+  story:
+    - "We need to stop this before it harms Adelia!"
+  startMsg: "Now you seem ready to face Aleesia.. or are you?"
+  objectiveTextList:
+    - "Now you seem ready to face Aleesia.. or are you?"
+  turnInMsg: ""
+  moneyPrize: 0
+  expPrize: 0
+  requiredLevel: 90
+  requiredQuests:
+    - 3
+  advancementMaterial: "RED_NETHER_BRICKS"
+  task1:
+    taskType: "TaskDealDamage"
+    mobKey: "TutorialBoss"
+    damageNeeded: 200
+  onCompleteAction1:
+    actionType: "InvincibleGiveAction"
+    duration: 40
+  onCompleteAction2:
+    actionType: "PotionEffectAction"
+    potionEffectType: "BLINDNESS"
+    duration: 100
+    amplifier: 3
+  onCompleteAction3:
+    actionType: "TeleportAction"
+    delay: 10
+    world: "world"
+    x: 2040.5
+    y: 107.5
+    z: 1524.5
+    yaw: -130.0
+    pitch: 7.0
+  onCompleteAction4:
+    actionType: "ClearPotionEffectAction"
+    potionEffectType: "WITHER"
+  onCompleteAction5:
+    actionType: "SendTitleAction"
+    top: "Waking up.."
+    bottom: ""
+  onCompleteAction6:
+    actionType: "FinishQuestAction"
+    questId: 4
+    ignoreCompilation: true
+  onCompleteAction7:
+    actionType: "StartQuestAction"
+    questId: 5
+  onCompleteAction8:
+    actionType: "TutorialEndAction"
